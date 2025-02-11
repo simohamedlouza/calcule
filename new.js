@@ -1,17 +1,14 @@
-// الحصول على عناصر الشاشة
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".buttons button");
 
-let currentInput = ""; // الإدخال الحالي
-let previousInput = ""; // الإدخال السابق
-let operator = ""; // العملية الحسابية
+let currentInput = ""; 
+let previousInput = "";
+let operator = ""; 
 
-// تحديث الشاشة
 function updateDisplay(value) {
     display.textContent = value || "0";
 }
 
-// تنظيف الشاشة
 function clearDisplay() {
     currentInput = "";
     previousInput = "";
@@ -19,7 +16,6 @@ function clearDisplay() {
     updateDisplay("0");
 }
 
-// تغيير الإشارة
 function toggleSign() {
     if (currentInput) {
         currentInput = (parseFloat(currentInput) * -1).toString();
@@ -27,7 +23,6 @@ function toggleSign() {
     }
 }
 
-// إضافة النسبة المئوية
 function addPercentage() {
     if (currentInput) {
         currentInput = (parseFloat(currentInput) / 100).toString();
@@ -35,25 +30,22 @@ function addPercentage() {
     }
 }
 
-// إدخال الأرقام
 function appendNumber(value) {
-    if (currentInput === "0" && value === "0") return; // منع الأصفار المتكررة
+    if (currentInput === "0" && value === "0") return; 
     currentInput += value;
     updateDisplay(currentInput);
 }
 
-// إدخال العمليات
 function appendOperator(value) {
-    if (currentInput === "") return; // لا يمكن إدخال عملية بدون أرقام
+    if (currentInput === "") return; 
     if (previousInput !== "") {
-        calculateResult(); // حساب النتيجة المؤقتة
+        calculateResult(); 
     }
     operator = value;
     previousInput = currentInput;
     currentInput = "";
 }
 
-// حساب النتيجة
 function calculateResult() {
     if (currentInput === "" || previousInput === "" || operator === "") return;
     const num1 = parseFloat(previousInput);
@@ -83,7 +75,6 @@ function calculateResult() {
     updateDisplay(currentInput);
 }
 
-// التعامل مع الأزرار
 buttons.forEach(button => {
     button.addEventListener("click", () => {
         const value = button.value;
